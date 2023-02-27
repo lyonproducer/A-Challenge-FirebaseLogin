@@ -3,13 +3,22 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { LocalstorageService } from './localstorage.service';
+import { BehaviorSubject } from 'rxjs';
+import { User, UserLogged } from '../shared/interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  userLogged: any;
+  userLogged: UserLogged | undefined;
+  user: BehaviorSubject<User> = new BehaviorSubject<User>({
+    email: '',
+    birthday: '',
+    fullName: '',
+    uid: '',
+    completedProfile: false,
+  })
   
   constructor(
     public afStore: AngularFirestore,
@@ -31,7 +40,7 @@ export class AuthService {
     return this.ngFireAuth.createUserWithEmailAndPassword(email, password)
   }
 
-  registerSetUserData(userLogged: any) {
+  registerSetUserData(userLogged: UserLogged) {
     this.userLogged = userLogged;
     const userRef: AngularFirestoreDocument<any> = this.afStore.doc(`users/${userLogged.user.uid}`);
     return userRef.set(userLogged.user, {
@@ -39,7 +48,7 @@ export class AuthService {
     });
   }
 
-  updateUserData(user: any) {
+  updateUserData(user: User) {
     const userRef: AngularFirestoreDocument<any> = this.afStore.doc(`users/${user.uid}`);
     return userRef.set(user, {
       merge: true
@@ -51,36 +60,34 @@ export class AuthService {
   }
 
   // Sign-out 
-  signOut() {
-    return this.ngFireAuth.signOut().then(() => {
-      this.userLogged = {
-        user: {
-          email: '',
-          password: '',
-          name: '', 
-          uid:null
-        }
-      };
-      //this.localStorage.clear();
-      this.router.navigate(['login']);
-    })
+  async signOut() {
+    await this.ngFireAuth.signOut();
+    this.userLogged = {
+      user: {
+        email: '',
+        fullName: '',
+        uid: '',
+        completedProfile: false
+      }
+    };
+    this.localStorage.clear();
+    this.router.navigate(['login']);
   }
 
   //history endpoints 
-  getHistory(uid: string) {
-    return this.afStore.collection('history', ref=> ref.where("uid", "==", uid)).valueChanges();
-  }
+  // getHistory(uid: string) {
+  //   return this.afStore.collection('history', ref=> ref.where("uid", "==", uid)).valueChanges();
+  // }
 
-  addHistory(data: any) {
-    return this.afStore.collection('history').add(Object.assign({}, data));
-    // return this.businessCollection.add(business);
-  }
+  // addHistory(data: any) {
+  //   return this.afStore.collection('history').add(Object.assign({}, data));
+  // }
 
-  updateHistoryData(data: any, id: string) {
-    const dataRef: AngularFirestoreDocument<any> = this.afStore.doc(`history/${id}`);
-    return dataRef.set(data, {
-      merge: true
-    });
-  }
+  // updateHistoryData(data: any, id: string) {
+  //   const dataRef: AngularFirestoreDocument<any> = this.afStore.doc(`history/${id}`);
+  //   return dataRef.set(data, {
+  //     merge: true
+  //   });
+  // }
 
 }

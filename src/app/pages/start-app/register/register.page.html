@@ -1,9 +1,44 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>register</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content padding>
 
-<ion-content>
+  <ion-grid style="margin-top: 50px;">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10" class="ion-text-center">
+        <img width="280px" src="assets/logo/logo.png" alt="">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
+  <ion-grid>
+    <ion-row class="ion-justify-content-center ion-margin-top">
+      <ion-col size="8">
+        <h5 class="ion-text-center font-bold text-secondary">
+          A continuación, captura los datos para tu registro
+        </h5>
+      </ion-col>
+
+      <ion-col size="9">
+        <form [formGroup]="formRegister" (ngSubmit)="register()" class="ion-margin-top ion-padding-top">
+          <ion-item id="rounded">
+            <ion-input name="email" formControlName="email" required placeholder="Email"></ion-input>
+          </ion-item>
+
+          <ion-item id="rounded">
+            <ion-input type="password" name="password" formControlName="password" required placeholder="Password"></ion-input>
+          </ion-item>
+
+          <ion-item id="rounded">
+            <ion-input type="password" name="confirmPassword" formControlName="confirmPassword" required placeholder="Confirmar Password"></ion-input>
+          </ion-item>
+        </form>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="9" class="ion-text-center">
+        <ion-button class="" [disabled]="formRegister.status === 'INVALID'" color="tertiary">
+          Registarse 
+        </ion-button>
+      </ion-col>  
+    </ion-row>  
+  </ion-grid>
 </ion-content>

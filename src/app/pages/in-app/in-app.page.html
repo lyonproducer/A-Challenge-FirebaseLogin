@@ -1,0 +1,50 @@
+<ion-menu menuId="first" id="menu" side="start" type="overlay" contentId="main-content" swipeGesture="false">
+  <ion-content>
+    <!-- <div class="header" *ngIf="authService.userLogged">
+
+      <img #imgLogo class="img-djs" [src]="authService.userLogged.profile.photo || 'assets/covers/profile-img.jpg'" alt="" (error)="setDefaultPic(imgLogo, event)" (click)="takePic()" *ngIf="authService.userLogged.status !== 'NOT_VALID'">
+      <ion-icon color="light" name="person-circle-outline" *ngIf="authService.userLogged.status === 'NOT_VALID'"></ion-icon>
+      <h5 class="ion-margin-start">{{authService.userLogged.firstName}} {{authService.userLogged.lastName}}</h5>
+    </div>
+
+    <div class="header" *ngIf="!authService.userLogged">
+      <h5>Modo Invitado</h5>
+    </div> -->
+    
+    <ion-item class="ion-item-menu" [routerLink]="['/in-app/my-profile']" (click)="menu.close()">
+      <ion-icon name="reader"></ion-icon>
+      <ion-label>
+        Mi Perfil 
+        <!-- <ion-badge color="purple-blue" *ngIf="authService.userLogged.status === 'NOT_VALID'">
+          Completar
+        </ion-badge> -->
+      </ion-label>
+    </ion-item>
+    <div class="line"></div>
+
+    <ion-item class="ion-item-menu" [routerLink]="['/in-app/location-map']" (click)="menu.close()">
+      <ion-icon name="map-outline"></ion-icon>
+      <ion-label>
+        Mis Trucks
+      </ion-label>
+    </ion-item>
+    <div class="line"></div>
+
+    <ion-item class="ion-item-menu" [routerLink]="['/in-app/about-us']" (click)="menu.close()">
+      <ion-icon name="information-circle-outline"></ion-icon>
+      <ion-label>
+        Acerca de
+      </ion-label>
+    </ion-item>
+    <div class="line"></div>
+
+    <ion-item class="ion-item-menu" (click)="logout();menu.close()">
+      <ion-icon name="log-out-outline"></ion-icon>
+      <ion-label>
+        Salir
+      </ion-label>
+    </ion-item>
+  </ion-content>
+</ion-menu>
+
+<ion-router-outlet id="main-content"></ion-router-outlet> 

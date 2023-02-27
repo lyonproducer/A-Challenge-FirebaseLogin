@@ -1,13 +1,13 @@
 
 <ion-content class="padding">
 
-  <!-- <ion-grid style="margin-top: 50px;">
+  <ion-grid style="margin-top: 50px;">
     <ion-row class="ion-justify-content-center">
-      <ion-col size="10" class="d-flex ion-justify-content-center">
-        <img src="assets/logo/logo.png" alt="">
+      <ion-col size="10" class="ion-text-center">
+        <img width="280px" src="assets/logo/logo.png" alt="">
       </ion-col>
     </ion-row>
-  </ion-grid> -->
+  </ion-grid>
 
   <ion-grid>
     <ion-row class="ion-justify-content-center">
@@ -18,6 +18,11 @@
         <h5 class="ion-text-center font-bold">
           Ingresa a tu cuenta
         </h5>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="d-flex ion-justify-content-center">
+      <ion-col size="6">
         <form class="ion-margin-top" style="margin-top: 40px;">
           <ion-item id="rounded">
             <ion-input name="email" [(ngModel)]="credentials['email']" required placeholder="Email de empleado"></ion-input>
@@ -30,8 +35,14 @@
     </ion-row>
 
     <ion-row class="ion-justify-content-center">
-      <ion-col size="9">
-        <ion-button (click)="login()" class="btn-primary" color="tertiary">
+      <ion-col size="9" class="ion-text-center">
+        <a routerLink="/register" class="ion-padding">No tengo cuenta</a>
+      </ion-col>  
+    </ion-row>  
+
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="9" class="ion-text-center">
+        <ion-button (click)="login()" color="tertiary">
           Ingresar 
         </ion-button>
       </ion-col>  
