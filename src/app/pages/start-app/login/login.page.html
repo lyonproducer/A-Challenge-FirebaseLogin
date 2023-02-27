@@ -1,0 +1,41 @@
+
+<ion-content class="padding">
+
+  <!-- <ion-grid style="margin-top: 50px;">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10" class="d-flex ion-justify-content-center">
+        <img src="assets/logo/logo.png" alt="">
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12">
+        <h5 class="ion-text-center font-bold">
+          ¡Hola!
+        </h5>
+        <h5 class="ion-text-center font-bold">
+          Ingresa a tu cuenta
+        </h5>
+        <form class="ion-margin-top" style="margin-top: 40px;">
+          <ion-item id="rounded">
+            <ion-input name="email" [(ngModel)]="credentials['email']" required placeholder="Email de empleado"></ion-input>
+          </ion-item>
+          <ion-item id="rounded">
+            <ion-input type="password" name="password" [(ngModel)]="credentials['password']" required placeholder="Contraseña"></ion-input>
+          </ion-item>
+        </form>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="9">
+        <ion-button (click)="login()" class="btn-primary" color="tertiary">
+          Ingresar 
+        </ion-button>
+      </ion-col>  
+    </ion-row>  
+  </ion-grid>
+
+</ion-content>

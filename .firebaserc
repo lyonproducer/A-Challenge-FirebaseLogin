@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "helgentech-test": {
+      "hosting": {
+        "app": [
+          "helgentech-test"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "helgentech-test"
+  }
+}
