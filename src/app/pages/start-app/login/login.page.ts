@@ -3,7 +3,10 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+import { LoadingService } from 'src/app/services/loading.service';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
+import { ToastService } from 'src/app/services/toast.service';
+import { UserLogged } from 'src/app/shared/interfaces';
 
 @Component({
   selector: 'app-login',
@@ -14,8 +17,7 @@ export class LoginPage implements OnInit {
 
   credentials : any = {
     email: '', 
-    password: '', 
-    token:'', 
+    password: ''
   };
 
   constructor(
@@ -23,31 +25,34 @@ export class LoginPage implements OnInit {
     private authService: AuthService,
     private localstorage: LocalstorageService,
     private router: Router,
-    public toastController: ToastController
+    public toastService: ToastService,
+    private loadingService: LoadingService
   ) { }
 
   ngOnInit() {
   }
 
   login(){
-    //this.utilsService.presentLoading();
+    this.loadingService.presentLoading(('Cargando...'));
     this.authService.signIn(this.credentials.email, this.credentials.password)      
     .then((res:any) => {
-      //console.log("response login ", res);
+      console.log("response login ", res);
       let subscription = this.authService.getUserData(res.user.uid).subscribe(
         async (resUser:any)=>{
-          const userLogged = {
-            token:res.user.Aa,
-            refreshToken:res.user.refreshToken,
+          const userLogged: UserLogged = {
+            token: res.user.Aa,
+            refreshToken: res.user.refreshToken,
             user: resUser
           }
 
           console.log("user", userLogged);
           this.authService.userLogged = userLogged;
-          this.localstorage.set("user",userLogged)!.then(()=>{
-            this.router.navigate(["/tabs"]);
+
+          this.localstorage.set("userLogged",userLogged)!.then(()=>{
             subscription.unsubscribe();
-            // this.utilsService.closeLoading();
+            this.router.navigateByUrl("/in-app");
+            this.authService.userBehavior.next(userLogged.user);
+            this.loadingService.stopLoading();
           });
           // this.formSingIn.reset();
         }
@@ -55,24 +60,11 @@ export class LoginPage implements OnInit {
     }).catch((error) => {
       console.log("error", error);
       if(error.code == 'auth/user-not-found'){
-        // this.utilsService.closeLoading();
-        this.presentErrorToast('Usuario no existente.');
+        this.toastService.presentToast('Usuario no existente.', 'error');
       }else{
-        // this.utilsService.closeLoading();
-        this.presentErrorToast(error.message);
+        this.toastService.presentToast(error.message, 'error');
       }
+      this.loadingService.stopLoading();
     });
   }
-
-  async presentErrorToast(msg: string) {
-    const toast = await this.toastController.create({
-      message: msg,
-      duration: 3000,
-      position: "top",
-      color: "danger",
-      cssClass: "toast",
-    });
-    toast.present();
-  }
-
 }

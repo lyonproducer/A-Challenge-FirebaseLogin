@@ -12,7 +12,7 @@ import { User, UserLogged } from '../shared/interfaces';
 export class AuthService {
 
   userLogged: UserLogged | undefined;
-  user: BehaviorSubject<User> = new BehaviorSubject<User>({
+  userBehavior: BehaviorSubject<User> = new BehaviorSubject<User>({
     email: '',
     birthday: '',
     fullName: '',

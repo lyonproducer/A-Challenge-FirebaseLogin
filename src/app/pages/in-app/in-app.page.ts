@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-in-app',
@@ -11,13 +12,14 @@ export class InAppPage implements OnInit {
 
   constructor(
     public menu: MenuController,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
   }
 
   logout() {
-    this.router.navigateByUrl('/login');
+    this.authService.signOut();
   }
 }

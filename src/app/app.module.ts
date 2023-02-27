@@ -22,7 +22,10 @@ import { AngularFireModule } from '@angular/fire/compat';
     //provideFirebaseApp(() => initializeApp(environment.firebase)), 
     //provideAuth(() => getAuth()), 
     //provideFirestore(() => getFirestore()),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot({
+      name: 'testDB',
+      storeName:'testDB' 
+    })
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

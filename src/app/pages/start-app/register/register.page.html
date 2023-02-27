@@ -17,7 +17,7 @@
       </ion-col>
 
       <ion-col size="9">
-        <form [formGroup]="formRegister" (ngSubmit)="register()" class="ion-margin-top ion-padding-top">
+        <form [formGroup]="formRegister" class="ion-margin-top ion-padding-top">
           <ion-item id="rounded">
             <ion-input name="email" formControlName="email" required placeholder="Email"></ion-input>
           </ion-item>
@@ -35,7 +35,13 @@
 
     <ion-row class="ion-justify-content-center">
       <ion-col size="9" class="ion-text-center">
-        <ion-button class="" [disabled]="formRegister.status === 'INVALID'" color="tertiary">
+        <a routerLink="/login" class="ion-padding">Ya tengo cuenta</a>
+      </ion-col>  
+    </ion-row>  
+
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="9" class="ion-text-center">
+        <ion-button (click)="register()" [disabled]="formRegister.status === 'INVALID'" color="tertiary">
           Registarse 
         </ion-button>
       </ion-col>  
