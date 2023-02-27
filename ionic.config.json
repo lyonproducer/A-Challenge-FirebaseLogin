@@ -1,0 +1,7 @@
+{
+  "name": "a-challenge",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
