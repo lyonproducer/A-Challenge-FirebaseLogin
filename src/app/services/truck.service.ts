@@ -36,7 +36,7 @@ export class TruckService {
         return data.Time === now;
       }
     );
-    // console.log('Found times at json ', timeFiltered);
+    console.log('Found times at json ', timeFiltered);
     if(timeFiltered.length > 0){
       timeFiltered.forEach(truck => {
         console.log("truck to update ", truck);
@@ -67,10 +67,4 @@ export class TruckService {
       merge: true
     });
   }
-
-  // addHistory(data: any) {
-  //   return this.afStore.collection('history').add(Object.assign({}, data));
-  // }
-
-
 }

@@ -1,8 +1,6 @@
 <app-header-menu [title]="'Mapa'"></app-header-menu>
 
 <ion-content>
-
-
   <ion-grid>
     <ion-row>
       <ion-col size="8">
@@ -16,7 +14,6 @@
           </ng-container>
         </agm-map>
       </ion-col>
-
       <ion-col size="4">
         <ion-list *ngIf="trucks.length > 0">
           <ion-item *ngFor="let item of trucks" lines="full">
@@ -32,8 +29,6 @@
             <ion-toggle slot="end" [checked]="item.show" (ionChange)="updateTruck(item)"></ion-toggle>
           </ion-item>
         </ion-list>
-
-
         <ion-item>
           Nivel de Zoom - {{zoom}}
         </ion-item>

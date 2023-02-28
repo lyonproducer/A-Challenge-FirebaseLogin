@@ -53,6 +53,10 @@ export class LoginPage implements OnInit {
             this.router.navigateByUrl("/in-app");
             this.authService.userBehavior.next(userLogged.user);
             this.loadingService.stopLoading();
+            this.credentials = {
+              email: '', 
+              password: ''
+            };
           });
           // this.formSingIn.reset();
         }
