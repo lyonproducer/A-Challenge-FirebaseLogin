@@ -9,6 +9,7 @@ import { LocationMapPageRoutingModule } from './location-map-routing.module';
 import { LocationMapPage } from './location-map.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { AgmCoreModule } from '@agm/core';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { AgmCoreModule } from '@agm/core';
     LocationMapPageRoutingModule,
     ComponentsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCSdlQdcfxYqkH_aSBWdky5UKybQo62tMk'
+      apiKey: environment.googleMapsApiKey
     })
   ],
   declarations: [LocationMapPage]

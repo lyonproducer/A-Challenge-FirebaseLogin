@@ -7,5 +7,6 @@ export const environment = {
     authDomain: 'helgentech-test.firebaseapp.com',
     messagingSenderId: '944597284051',
   },
-  production: true
+  production: true,
+  googleMapsApiKey: 'AIzaSyCSdlQdcfxYqkH_aSBWdky5UKybQo62tMk'
 };
