@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LocalstorageService } from './services/localstorage.service';
+import { TruckService } from './services/truck.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,8 @@ import { LocalstorageService } from './services/localstorage.service';
 })
 export class AppComponent {
   constructor(
-    private localStorage: LocalstorageService
+    private localStorage: LocalstorageService,
+    private truckService: TruckService
   ) {
     this.localStorage.init();
   }

@@ -1,21 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TruckService } from 'src/app/services/truck.service';
+import { Truck } from 'src/app/shared/interfaces';
 
 @Component({
   selector: 'app-location-map',
   templateUrl: './location-map.page.html',
   styleUrls: ['./location-map.page.scss'],
 })
-export class LocationMapPage implements OnInit {
+export class LocationMapPage implements OnInit, OnDestroy {
 
-  trucks: any[] = [];
+  trucks: Truck[] = [];
 
-  truckToFollow: any;
+  truckToFollow: Truck | undefined;
   isFollowing = false;
 
   title = 'My first AGM project';
-  lat = 8.296185;
-  lng = -62.734596;
+  lat: number = 8.296185;
+  lng: number = -62.734596;
+
+  latAux: number = 0;
+  lngAux: number = 0;
 
   zoom = 11;
 
@@ -25,16 +29,17 @@ export class LocationMapPage implements OnInit {
 
   ngOnInit() {
     this.getTrucks();
+    this.truckService.initTruck();
   }
 
   getTrucks() { 
     this.truckService.getTrucks().subscribe(
-      res=> {
-        console.log(res);
+      (res: Truck[]) => {
+        //console.log(res);
         this.trucks = res;
         if(this.isFollowing) {
           this.trucks.forEach(truck => {
-            if(this.truckToFollow = truck) {
+            if(this.truckToFollow?.id === truck.id) {
               this.lat = truck.latitude;
               this.lng = truck.longitude;
             }
@@ -45,10 +50,11 @@ export class LocationMapPage implements OnInit {
   }
 
   goTo(truck: any) {
-    if(truck === this.truckToFollow) {
+    if(this.truckToFollow?.id === truck.id) {
       this.isFollowing = false;
-      this.truckToFollow = null;
+      this.truckToFollow = undefined;
     } else {
+      this.truckToFollow = undefined;
       this.truckToFollow = truck;
       this.isFollowing = true;
       this.lat = truck.latitude;
@@ -56,4 +62,26 @@ export class LocationMapPage implements OnInit {
     }
   }
 
+  async updateTruck(truck: Truck) {
+    await this.truckService.updateTruckData({
+      show: !truck.show
+    }, truck.id);
+  }
+
+  centerChanged(event: any) {
+    this.latAux = event.lat;
+    this.lngAux = event.lng;
+  }
+
+  zoomChanged(event: any) {
+    this.zoom = event;
+    this.lat = this.latAux;
+    this.lng = this.lngAux;
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.truckService.clearInterval();
+  }
 }

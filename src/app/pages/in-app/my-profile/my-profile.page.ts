@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
   selector: 'app-my-profile',

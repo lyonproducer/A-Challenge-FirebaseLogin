@@ -6,7 +6,8 @@
   <ion-grid>
     <ion-row>
       <ion-col size="8">
-        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (centerChange)="centerChanged($event)"
+        (zoomChange)="zoomChanged($event)">
           <ng-container *ngFor="let truck of trucks">
             <agm-marker [latitude]="truck.latitude" [longitude]="truck.longitude"
             [iconUrl]="'https://cdn-icons-png.flaticon.com/64/870/870181.png'"
@@ -22,11 +23,13 @@
             <ion-label slot="start">
               {{item.name}} - {{ item.id }}
             </ion-label>
-            <ion-icon name="eye-outline" slot="end" (click)="goTo(item)" class="eye" 
-            *ngIf="this.truckToFollow !== item"></ion-icon>
-            <ion-icon name="eye" slot="end" (click)="goTo(item)" class="eye" 
-            *ngIf="this.truckToFollow === item"></ion-icon>
-            <ion-toggle slot="end" [checked]="item.show" (ionChange)="item.show = !item.show"></ion-toggle>
+            <ng-container *ngIf="item.show">
+              <ion-icon name="eye-outline" slot="end" (click)="goTo(item)" class="eye" 
+              *ngIf="this.truckToFollow?.id !== item.id"></ion-icon>
+              <ion-icon name="eye" slot="end" (click)="goTo(item)" class="eye" 
+              *ngIf="this.truckToFollow?.id === item.id"></ion-icon>
+            </ng-container>
+            <ion-toggle slot="end" [checked]="item.show" (ionChange)="updateTruck(item)"></ion-toggle>
           </ion-item>
         </ion-list>
 

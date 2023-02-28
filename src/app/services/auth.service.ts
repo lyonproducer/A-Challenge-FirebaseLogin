@@ -5,6 +5,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat
 import { LocalstorageService } from './localstorage.service';
 import { BehaviorSubject } from 'rxjs';
 import { User, UserLogged } from '../shared/interfaces';
+import { TruckService } from './truck.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,8 @@ export class AuthService {
     public ngFireAuth: AngularFireAuth,
     public router: Router,  
     public ngZone: NgZone,
-    private localStorage: LocalstorageService
+    private localStorage: LocalstorageService,
+    private truckService: TruckService
   ) {
 
   }
@@ -71,6 +73,7 @@ export class AuthService {
       }
     };
     this.localStorage.clear();
+    this.truckService.clearInterval();
     this.router.navigate(['login']);
   }
 
