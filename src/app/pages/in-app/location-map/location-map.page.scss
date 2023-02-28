@@ -1,0 +1,21 @@
+agm-map {
+    height: 100%;
+}
+
+ion-grid {
+    ion-col {
+        height: 100vh;
+    }
+}
+
+ion-label {
+    overflow: unset !important;
+}
+
+.eye:hover {
+    cursor: pointer;
+}
+
+.eye:active {
+    opacity: 0.6;
+}

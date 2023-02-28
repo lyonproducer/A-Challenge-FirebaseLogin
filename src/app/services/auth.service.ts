@@ -74,20 +74,4 @@ export class AuthService {
     this.router.navigate(['login']);
   }
 
-  //history endpoints 
-  // getHistory(uid: string) {
-  //   return this.afStore.collection('history', ref=> ref.where("uid", "==", uid)).valueChanges();
-  // }
-
-  // addHistory(data: any) {
-  //   return this.afStore.collection('history').add(Object.assign({}, data));
-  // }
-
-  // updateHistoryData(data: any, id: string) {
-  //   const dataRef: AngularFirestoreDocument<any> = this.afStore.doc(`history/${id}`);
-  //   return dataRef.set(data, {
-  //     merge: true
-  //   });
-  // }
-
 }

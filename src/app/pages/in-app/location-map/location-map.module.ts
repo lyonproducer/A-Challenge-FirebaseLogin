@@ -8,6 +8,7 @@ import { LocationMapPageRoutingModule } from './location-map-routing.module';
 
 import { LocationMapPage } from './location-map.page';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   imports: [
@@ -15,7 +16,10 @@ import { ComponentsModule } from 'src/app/components/components.module';
     FormsModule,
     IonicModule,
     LocationMapPageRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCSdlQdcfxYqkH_aSBWdky5UKybQo62tMk'
+    })
   ],
   declarations: [LocationMapPage]
 })

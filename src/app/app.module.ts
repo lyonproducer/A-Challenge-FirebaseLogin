@@ -11,6 +11,7 @@ import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { AngularFireModule } from '@angular/fire/compat';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +26,9 @@ import { AngularFireModule } from '@angular/fire/compat';
     IonicStorageModule.forRoot({
       name: 'testDB',
       storeName:'testDB' 
+    }),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCSdlQdcfxYqkH_aSBWdky5UKybQo62tMk'
     })
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

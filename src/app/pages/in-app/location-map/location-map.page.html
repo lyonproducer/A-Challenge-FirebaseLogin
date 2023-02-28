@@ -1,5 +1,40 @@
-<app-header-menu [title]="'maps'"></app-header-menu>
+<app-header-menu [title]="'Mapa'"></app-header-menu>
 
 <ion-content>
 
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="8">
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+          <ng-container *ngFor="let truck of trucks">
+            <agm-marker [latitude]="truck.latitude" [longitude]="truck.longitude"></agm-marker>
+          </ng-container>
+        </agm-map>
+      </ion-col>
+
+      <ion-col size="4">
+        <ion-list *ngIf="trucks.length > 0">
+          <ion-item *ngFor="let item of trucks" lines="full">
+            <ion-label slot="start">
+              {{item.name}} - {{ item.id }}
+            </ion-label>
+            <ion-icon name="eye-outline" slot="end" (click)="goTo(item)" class="eye" 
+            *ngIf="this.truckToFollow !== item"></ion-icon>
+            <ion-icon name="eye" slot="end" (click)="goTo(item)" class="eye" 
+            *ngIf="this.truckToFollow === item"></ion-icon>
+            <ion-toggle slot="end" [checked]="item.show"></ion-toggle>
+          </ion-item>
+        </ion-list>
+
+
+        <ion-item>
+          Nivel de Zoom - {{zoom}}
+        </ion-item>
+        <ion-item>
+          <ion-range [ticks]="true" [snaps]="true" [min]="11" [max]="16" [(ngModel)]="zoom"></ion-range>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
