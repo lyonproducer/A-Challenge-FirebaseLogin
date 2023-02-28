@@ -32,7 +32,6 @@ export class LocationMapPage implements OnInit {
       res=> {
         console.log(res);
         this.trucks = res;
-
         if(this.isFollowing) {
           this.trucks.forEach(truck => {
             if(this.truckToFollow = truck) {
@@ -41,7 +40,6 @@ export class LocationMapPage implements OnInit {
             }
           });
         }
-
       }
     )
   }

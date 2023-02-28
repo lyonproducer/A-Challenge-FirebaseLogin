@@ -8,7 +8,10 @@
       <ion-col size="8">
         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
           <ng-container *ngFor="let truck of trucks">
-            <agm-marker [latitude]="truck.latitude" [longitude]="truck.longitude"></agm-marker>
+            <agm-marker [latitude]="truck.latitude" [longitude]="truck.longitude"
+            [iconUrl]="'https://cdn-icons-png.flaticon.com/64/870/870181.png'"
+            [visible]="truck.show"
+            ></agm-marker>
           </ng-container>
         </agm-map>
       </ion-col>
@@ -23,7 +26,7 @@
             *ngIf="this.truckToFollow !== item"></ion-icon>
             <ion-icon name="eye" slot="end" (click)="goTo(item)" class="eye" 
             *ngIf="this.truckToFollow === item"></ion-icon>
-            <ion-toggle slot="end" [checked]="item.show"></ion-toggle>
+            <ion-toggle slot="end" [checked]="item.show" (ionChange)="item.show = !item.show"></ion-toggle>
           </ion-item>
         </ion-list>
 
