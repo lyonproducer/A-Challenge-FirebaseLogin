@@ -6,7 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { ToastService } from 'src/app/services/toast.service';
-import { User, UserRegisterDto } from 'src/app/shared/interfaces';
+import { User, UserLogged, UserRegisterDto } from 'src/app/shared/interfaces';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -44,12 +44,13 @@ export class RegisterPage implements OnInit {
     this.authService.registerUser(this.formRegister.value.email, this.formRegister.value.password)      
     .then((res:any) => {
       console.log("response register ", res);
-      const userLogged = {
+      const userLogged: UserLogged = {
         token:res.user.Aa,
         refreshToken:res.user.refreshToken,
         user: {
           email: this.formRegister.value.email,
           fullName: '',
+          birthday: '',
           uid: res.user.uid,
           completedProfile:false
         } 

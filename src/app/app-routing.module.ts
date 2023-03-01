@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
+import { InnAppGuard } from './guards/in-app.guard';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
   {
@@ -20,13 +21,22 @@ const routes: Routes = [
   },
   {
     path: 'in-app',
-    loadChildren: () => import('./pages/in-app/in-app.module').then( m => m.InAppPageModule)
+    loadChildren: () => import('./pages/in-app/in-app.module').then( m => m.InAppPageModule),
+    canActivate: [InnAppGuard]
+  },
+  {
+    path: '404',
+    loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
+  },
+  {
+    path: '**', 
+    redirectTo: '/404'
   },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules})
   ],
   exports: [RouterModule]
 })
