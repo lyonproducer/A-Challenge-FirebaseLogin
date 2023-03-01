@@ -1,5 +1,8 @@
 agm-map {
-    height: 80%;
+    height: 95%;
+    @media (max-height: 700px){
+        height: 75%;
+    }
 }
 
 ion-grid {
