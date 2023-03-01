@@ -72,6 +72,13 @@ export class AuthService {
         completedProfile: false
       }
     };
+    this.userBehavior.next({
+      email: '',
+      birthday: '',
+      fullName: '',
+      uid: '',
+      completedProfile: false,
+    });
     this.localStorage.clear();
     this.truckService.clearInterval();
     this.router.navigate(['login']);

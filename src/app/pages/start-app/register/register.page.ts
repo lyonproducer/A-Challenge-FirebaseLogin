@@ -51,8 +51,7 @@ export class RegisterPage implements OnInit {
           email: this.formRegister.value.email,
           fullName: '',
           uid: res.user.uid,
-          completedProfile:false,
-          verifiedProfile:false,
+          completedProfile:false
         } 
       }
       this.localStorage.set("user",userLogged.user);
