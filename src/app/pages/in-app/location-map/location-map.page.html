@@ -9,7 +9,7 @@
           <ng-container *ngFor="let truck of trucks">
             <agm-marker [latitude]="truck.latitude" [longitude]="truck.longitude"
             [iconUrl]="'https://cdn-icons-png.flaticon.com/' + getIconSize() + '/870/870181.png'"
-            [visible]="truck.show"
+            [visible]="truck.show" [label]="truck.id"
             ></agm-marker>
           </ng-container>
         </agm-map>
@@ -33,7 +33,7 @@
           Nivel de Zoom - {{zoom}}
         </ion-item>
         <ion-item>
-          <ion-range [ticks]="true" [snaps]="true" [min]="11" [max]="16" [(ngModel)]="zoom"></ion-range>
+          <ion-range [ticks]="true" [snaps]="true" [min]="10" [max]="16" [(ngModel)]="range" (ionChange)="zoom=range;"></ion-range>
         </ion-item>
       </ion-col>
     </ion-row>

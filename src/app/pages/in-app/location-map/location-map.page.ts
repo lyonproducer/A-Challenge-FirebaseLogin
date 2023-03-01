@@ -18,10 +18,11 @@ export class LocationMapPage implements OnInit, OnDestroy {
   lat: number = 53.346359;
   lng: number = -6.268535;
 
-  latAux: number = 0;
-  lngAux: number = 0;
+  latAux: number = 53.346359; 
+  lngAux: number = -6.268535;
 
   zoom = 11;
+  range: number = 11;
 
   constructor(
     private truckService: TruckService
@@ -74,7 +75,7 @@ export class LocationMapPage implements OnInit, OnDestroy {
   }
 
   zoomChanged(event: any) {
-    this.zoom = event;
+    this.range = event;
     this.lat = this.latAux;
     this.lng = this.lngAux;
   }
@@ -84,6 +85,6 @@ export class LocationMapPage implements OnInit, OnDestroy {
   }
 
   getIconSize() {
-    return this.zoom < 14 ? 32 : 64;
+    return this.zoom < 13 ? 32 : 64;
   }
 }
