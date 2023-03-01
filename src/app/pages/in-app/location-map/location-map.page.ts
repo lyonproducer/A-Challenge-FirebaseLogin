@@ -14,9 +14,9 @@ export class LocationMapPage implements OnInit, OnDestroy {
   truckToFollow: Truck | undefined;
   isFollowing = false;
 
-  title = 'My first AGM project';
-  lat: number = 8.296185;
-  lng: number = -62.734596;
+  // dublin latitude & latitude by default
+  lat: number = 53.346359;
+  lng: number = -6.268535;
 
   latAux: number = 0;
   lngAux: number = 0;
@@ -80,8 +80,10 @@ export class LocationMapPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
     this.truckService.clearInterval();
+  }
+
+  getIconSize() {
+    return this.zoom < 14 ? 32 : 64;
   }
 }

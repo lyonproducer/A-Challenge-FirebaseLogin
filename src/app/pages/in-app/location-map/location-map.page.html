@@ -8,7 +8,7 @@
         (zoomChange)="zoomChanged($event)">
           <ng-container *ngFor="let truck of trucks">
             <agm-marker [latitude]="truck.latitude" [longitude]="truck.longitude"
-            [iconUrl]="'https://cdn-icons-png.flaticon.com/64/870/870181.png'"
+            [iconUrl]="'https://cdn-icons-png.flaticon.com/' + getIconSize() + '/870/870181.png'"
             [visible]="truck.show"
             ></agm-marker>
           </ng-container>
