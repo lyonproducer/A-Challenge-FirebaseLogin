@@ -55,7 +55,7 @@ export class RegisterPage implements OnInit {
           verifiedProfile:false,
         } 
       }
-      
+      this.localStorage.set("user",userLogged.user);
       this.localStorage.set("userLogged",userLogged)!.then(()=>{
         this.authService.registerSetUserData(userLogged);
         this.authService.userBehavior.next(userLogged.user);

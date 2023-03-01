@@ -45,9 +45,9 @@ export class LoginPage implements OnInit {
             user: resUser
           }
 
-          console.log("user", userLogged);
+          console.log("user res ", userLogged);
           this.authService.userLogged = userLogged;
-
+          this.localstorage.set("user",userLogged.user);
           this.localstorage.set("userLogged",userLogged)!.then(()=>{
             subscription.unsubscribe();
             this.router.navigateByUrl("/in-app");
@@ -58,7 +58,6 @@ export class LoginPage implements OnInit {
               password: ''
             };
           });
-          // this.formSingIn.reset();
         }
       );
     }).catch((error) => {
