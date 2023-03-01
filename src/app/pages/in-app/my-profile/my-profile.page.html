@@ -1,34 +1,53 @@
-<app-header-menu [title]="'Profile'"></app-header-menu>
+<app-header-menu [title]="'Mi Perfil'"></app-header-menu>
 
-<ion-content>
+<ion-content class="ion-padding">
+  <ion-row class="d-flex ion-justify-content-center">
+    <ion-col size="6">
+      <form #myForm="ngForm">
+        <ion-label class="ion-margin-top">
+          <p class="ion-no-margin">Nombre Completo</p>
+        </ion-label>
 
-            <!-- <ion-item id="rounded">
-            <ion-input name="name" [(ngModel)]="user['fullName']" required placeholder="Nombre"></ion-input>
-          </ion-item> -->
+        <ion-item id="rounded" class="ion-margin-bottom">
+          <ion-input name="fullName" [(ngModel)]="fullName" required placeholder="Nombre Completo"></ion-input>
+        </ion-item>
 
-          <!-- <ion-label class="ion-margin-top">
-            <p class="ion-no-margin">Fecha de cumpleaños</p>
-          </ion-label>
-          <ion-item id="rounded" (click)="popoverDate.present()">
-            <ion-input [value]="hInn" placeholder="Hora de inicio de Jornada"></ion-input>
-            <ion-button slot="end" fill="clear" id="open-time-input-1">
-              <ion-icon name="time" class="text-green"></ion-icon>
+        <ion-label class="ion-margin-top">
+          <p class="ion-no-margin">Fecha de nacimiento</p>
+        </ion-label>
+
+        <ion-item id="rounded" (click)="popoverDate.present()">
+          <ion-input [value]="date" placeholder="Fecha de nacimiento" required name="date" [(ngModel)]="date"></ion-input>
+          <ion-button slot="end" fill="clear" id="open-time-input-1">
+            <ion-icon name="calendar-outline"></ion-icon>
+          </ion-button>
+          <ion-popover showBackdrop="true" #popoverDate trigger="open-time-input-1" show-backdrop="false">
+            <ng-template>
+              <ion-datetime
+                #dateTime1
+                presentation="date"
+                size="cover"
+                (ionChange)="date = formatTime(dateTime1.value)"
+              >
+                <ion-buttons slot="buttons">
+                  <ion-button (click)="confirm(dateTime1, popoverDate)">Seleccionar</ion-button>
+                  <ion-button (click)="reset(dateTime1, popoverDate)">Borrar</ion-button>
+                </ion-buttons>
+              </ion-datetime>
+            </ng-template>
+          </ion-popover> 
+        </ion-item>
+
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="9" class="ion-text-center">
+            <ion-button (click)="save()" color="tertiary" [disabled]="!myForm.valid">
+              Guardar 
             </ion-button>
-            <ion-popover showBackdrop="true" #popoverDate trigger="open-time-input-1" show-backdrop="false">
-              <ng-template>
-                <ion-datetime
-                  #dateTime1
-                  presentation="date"
-                  size="cover"
-                  (ionChange)="hInn = formatTime(dateTime1.value)"
-                >
-                  <ion-buttons slot="buttons">
-                    <ion-button (click)="confirm(dateTime1, popoverDate)">Seleccionar</ion-button>
-                    <ion-button (click)="reset(dateTime1)">Borrar</ion-button>
-                  </ion-buttons>
-                </ion-datetime>
-              </ng-template>
-            </ion-popover> 
-          </ion-item> -->
-          
+          </ion-col>  
+        </ion-row>  
+      </form>
+    </ion-col>
+  </ion-row>
+
+
 </ion-content>

@@ -16,8 +16,7 @@ export class InAppPage implements OnInit {
     private authService: AuthService
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   logout() {
     this.authService.signOut();
